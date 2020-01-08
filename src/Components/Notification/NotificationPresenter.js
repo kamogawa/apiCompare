@@ -55,14 +55,16 @@ const Button = styled.button`
 const NotificationPresenter = ({ id, text, seen }) => (
   <Notification seen={seen}>
     <Flex alignCenter justifyBetween>
-      <Title>
-        <Store.Consumer>{store => store.message}</Store.Consumer>
-      </Title>
+    <Title>{text}</Title>
       <FlexItem>
         <Fragment>
-          <Button success seen={seen} onClick={() => {}}>
-            <FontAwesome name="check" />
-          </Button>
+          <Store.Consumer>
+            {store => (
+              <Button success seen={seen} onClick={store.changeMessage}>
+                <FontAwesome name="check" />
+              </Button>
+            )}
+          </Store.Consumer>
           <Button danger seen={seen} onClick={() => {}}>
             <FontAwesome name="times" />
           </Button>
